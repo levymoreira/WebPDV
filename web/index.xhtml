@@ -16,6 +16,12 @@
                 .ui-widget, .ui-widget .ui-widget {  
                     font-size: 12px !important;  
                 }     
+                .ui-panelgrid td, .ui-panelgrid tr{
+                    border-style: none !important
+                }
+                .buttonClass{
+                    margin-top: 16px;
+                }
             </style>     
             
             <script src="https://www.java.com/js/deployJava.js"></script>
@@ -33,89 +39,143 @@
             <script src="resources/css/appletJS.js"></script>
         </h:head>
 
-        <h:form id="formVenda">
+        <h:form id="formPDV">
         <h:body>
             
             <p:panel id="panelErroApplet">
                 <h3>Aparentemente seu computador e/ou navegador nao esta com o Java!</h3>         
                 Confira seu Java em: <a href="url"> https://www.java.com/pt_BR/download/installed.jsp</a>                
             </p:panel>
+            <br/>
             
-            <p:panelGrid>
-                <p:row>
-                    <p:column>       
-                        <p:outputLabel value="Descrição" for="inputDescricao" /> <br/>
-                        <p:inputText id="inputDescricao" value="DESCRICAO" />
-                    </p:column>
-                    <p:column>    
-                        <p:outputLabel value="Unidade" /> <br/>
-                        <p:inputText id="inputUnidade" value="UN" />
-                    </p:column>
-                    <p:column>   
-                        <p:outputLabel value="Qtd" /> <br/>
-                        <p:inputText id="inputQtd" value="1" />
-                    </p:column>
-                    <p:column>                        
-                        <h:outputLabel value="Valor Unitario" /> <br/>
-                        <p:inputText id="inputValorUnitario" value="10" />
-                    </p:column>                        
-                    <p:column> 
-                        <p:commandButton value="vendeItem" onclick="vendeItem()"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>                        
-                        <p:outputLabel value="Mensagem Subtotaliza" /> <br/>
-                        <p:inputText id="inputSubtotaliza" value="DESCRICAO" />
-                    </p:column>                        
-                    <p:column> 
-                        <p:commandButton value="subtotalizaCupom" onclick="subtotalizaCupom()"/>
-                    </p:column>
-                </p:row>   
-                <p:row>
-                    <p:column>                        
-                        <p:outputLabel value="Forma de Pagamento" /> <br/>
-                        <p:inputText id="inputFpgto" value="DESCRICAO" />
-                    </p:column> 
-                    <p:column>                        
-                        <p:outputLabel value="Valor" /> <br/>
-                        <p:inputText id="inputValorFpgto" value="DESCRICAO" />
-                    </p:column>                        
-                    <p:column> 
-                        <p:commandButton value="efetuaPagamento" onclick="efetuaPagamento()"/>
-                    </p:column>
-                </p:row> 
-                <p:row>
-                    <p:column>                        
-                        <p:outputLabel value="Mensagem" /> <br/>
-                        <p:inputText id="inputMsgFechaCupom" value="DESCRICAO" />
-                    </p:column>                        
-                    <p:column> 
-                        <p:commandButton value="fechaCupom" onclick="fechaCupom()"/>
-                    </p:column>
-                </p:row> 
-                <p:row>               
-                    <p:column> 
-                        <p:commandButton value="cancelaCupom" onclick="cancelaCupom()"/>
-                    </p:column>
-                </p:row> 
-                <p:row>               
-                    <p:column> 
-                        <p:commandButton value="status" onclick="verificarStatus()"/>
-                    </p:column>
-                </p:row> 
-                <p:row>               
-                    <p:column> 
-                        <p:commandButton value="ativar" onclick="ativar()"/>
-                    </p:column>
-                </p:row> 
-            </p:panelGrid>
-       
+            <p:tabView id="tabViewPDV">
+                <p:tab title="Configurações">
+                    <p:panelGrid>                        
+                        <p:row> 
+                            <p:column> 
+                                <p:outputLabel value="Modelo" for="inputModelo" /> <br/>
+                                <p:inputText id="inputModelo" value="4" />
+                            </p:column>
+                            <p:column> 
+                                <p:outputLabel value="Porta" for="inputPorta" /> <br/>
+                                <p:inputText id="inputPorta" value="COM8" />
+                            </p:column>
+                            <p:column> 
+                                <p:outputLabel value="Velocidade" for="inputVelocidade" /> <br/>
+                                <p:inputText id="inputVelocidade" value="115200" />
+                            </p:column>
+                            <p:column> 
+                                <p:commandButton value="ativar" styleClass="buttonClass" onclick="ativar()"/>
+                            </p:column>
+                        </p:row> 
+                        <p:row>               
+                            <p:column> 
+                                <p:commandButton value="status" onclick="verificarStatus()"/>
+                            </p:column>
+                        </p:row> 
+                    </p:panelGrid>
+                </p:tab>
+                <p:tab title="Venda">
+                    <p:panelGrid>
+                        <p:row>
+                            <p:column>       
+                                <p:outputLabel value="Código" for="inputCodigo" /> <br/>
+                                <p:inputText id="inputCodigo" value="0001" />
+                            </p:column>
+                            <p:column>       
+                                <p:outputLabel value="Descrição" for="inputDescricao" /> <br/>
+                                <p:inputText id="inputDescricao" value="PRODUTO UM" />
+                            </p:column>
+                            <p:column>       
+                                <p:outputLabel value="Aliquota" for="inputAliquota" /> <br/>
+                                <p:inputText id="inputAliquota" value="I" />
+                            </p:column>
+                            <p:column>   
+                                <p:outputLabel value="Quantidade" /> <br/>
+                                <p:inputText id="inputQuantidade" value="2" />
+                            </p:column>
+                            <p:column>   
+                                <p:outputLabel value="Valor Unitario" /> <br/>
+                                <p:inputText id="inputValorUnitario" value="5" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>   
+                                <p:outputLabel value="Desconto Percentual" /> <br/>
+                                <p:inputText id="inputDescontoPercentual" value="10" />
+                            </p:column>
+                            <p:column>    
+                                <p:outputLabel value="Unidade" /> <br/>
+                                <p:inputText id="inputUnidade" value="UN" />
+                            </p:column>                            
+                            <p:column>                        
+                                <h:outputLabel value="Tipo Desconto/Acrescimo" /> <br/>
+                                <p:inputText id="inputTipoDescontoAcrescimo" value="%" />
+                            </p:column>     
+                            <p:column>                        
+                                <h:outputLabel value="Desconto/Acrescimo" /> <br/>
+                                <p:inputText id="inputDescontoAcrescimo" value="D" />
+                            </p:column> 
+                            <p:column>                        
+                                <h:outputLabel value="Código Departamento" /> <br/>
+                                <p:inputText id="inputCodigoDepartamento" value="0" />
+                            </p:column>  
+                            <p:column> 
+                                <p:commandButton value="vendeItem" styleClass="buttonClass" onclick="vendeItem()"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>                        
+                                <p:outputLabel value="Mensagem Subtotaliza" /> <br/>
+                                <p:inputText id="inputSubtotaliza" value="DESCRICAO" />
+                            </p:column>                        
+                            <p:column> 
+                                <p:commandButton value="subtotalizaCupom" styleClass="buttonClass" onclick="subtotalizaCupom()"/>
+                            </p:column>
+                        </p:row>   
+                        <p:row>
+                            <p:column>                        
+                                <p:outputLabel value="Forma de Pagamento" /> <br/>
+                                <p:inputText id="inputFpgto" value="DESCRICAO" />
+                            </p:column> 
+                            <p:column>                        
+                                <p:outputLabel value="Valor" /> <br/>
+                                <p:inputText id="inputValorFpgto" value="DESCRICAO" />
+                            </p:column>                        
+                            <p:column> 
+                                <p:commandButton value="efetuaPagamento" styleClass="buttonClass" onclick="efetuaPagamento()"/>
+                            </p:column>
+                        </p:row> 
+                        <p:row>
+                            <p:column>                        
+                                <p:outputLabel value="Mensagem" /> <br/>
+                                <p:inputText id="inputMsgFechaCupom" value="DESCRICAO" />
+                            </p:column>                        
+                            <p:column> 
+                                <p:commandButton value="fechaCupom" styleClass="buttonClass" onclick="fechaCupom()"/>
+                            </p:column>
+                        </p:row> 
+                        <p:row>               
+                            <p:column> 
+                                <p:commandButton value="cancelaCupom" onclick="cancelaCupom()"/>
+                            </p:column>
+                        </p:row> 
+                    </p:panelGrid>
+                </p:tab>
+            </p:tabView>
+            
+            <br/>
             <applet id="appletECF"  
                     code="AppletECF" 
                     archive="jna-3.5.1.jar, platform-3.5.1.jar, jACBrFramework.jar, mongo.jar, AppletECF.jar">  
             </applet> 
        
+            <script>
+                function appletLoaded(){
+                    document.getElementById('formPDV:panelErroApplet').style.display= 'none';
+                }
+            </script>
+            
         </h:body>
         </h:form>
     </f:view>
