@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>WebPDV</title>
+            </f:facet>
+            
+            <style>
+                .ui-widget, .ui-widget .ui-widget {  
+                    font-size: 12px !important;  
+                }     
+            </style>     
+            
+            <script src="https://www.java.com/js/deployJava.js"></script>
+            
+            <script>
+                <!--
+                    Applet id can be used to get a reference to the applet object 
+                    Font: http://docs.oracle.com/javase/tutorial/deployment/applet/invokingAppletMethodsFromJavaScript.html
+                -->
+                var attributes = { id:'appletECF', code:'AppletECF',  width:1, height:1} ;
+                var parameters = { jnlp_href: 'appletECF.jnlp'} ;
+                deployJava.runApplet(attributes, parameters, '1.6');                
+            </script>
+            
+            <script src="resources/css/appletJS.js"></script>
+        </h:head>
+
+        <h:form id="formVenda">
+        <h:body>
+            
+            <p:panel id="panelErroApplet">
+                <h3>Aparentemente seu computador e/ou navegador nao esta com o Java!</h3>         
+                Confira seu Java em: <a href="url"> https://www.java.com/pt_BR/download/installed.jsp</a>                
+            </p:panel>
+            
+            <p:panelGrid>
+                <p:row>
+                    <p:column>       
+                        <p:outputLabel value="Descrição" for="inputDescricao" /> <br/>
+                        <p:inputText id="inputDescricao" value="DESCRICAO" />
+                    </p:column>
+                    <p:column>    
+                        <p:outputLabel value="Unidade" /> <br/>
+                        <p:inputText id="inputUnidade" value="UN" />
+                    </p:column>
+                    <p:column>   
+                        <p:outputLabel value="Qtd" /> <br/>
+                        <p:inputText id="inputQtd" value="1" />
+                    </p:column>
+                    <p:column>                        
+                        <h:outputLabel value="Valor Unitario" /> <br/>
+                        <p:inputText id="inputValorUnitario" value="10" />
+                    </p:column>                        
+                    <p:column> 
+                        <p:commandButton value="vendeItem" onclick="vendeItem()"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>                        
+                        <p:outputLabel value="Mensagem Subtotaliza" /> <br/>
+                        <p:inputText id="inputSubtotaliza" value="DESCRICAO" />
+                    </p:column>                        
+                    <p:column> 
+                        <p:commandButton value="subtotalizaCupom" onclick="subtotalizaCupom()"/>
+                    </p:column>
+                </p:row>   
+                <p:row>
+                    <p:column>                        
+                        <p:outputLabel value="Forma de Pagamento" /> <br/>
+                        <p:inputText id="inputFpgto" value="DESCRICAO" />
+                    </p:column> 
+                    <p:column>                        
+                        <p:outputLabel value="Valor" /> <br/>
+                        <p:inputText id="inputValorFpgto" value="DESCRICAO" />
+                    </p:column>                        
+                    <p:column> 
+                        <p:commandButton value="efetuaPagamento" onclick="efetuaPagamento()"/>
+                    </p:column>
+                </p:row> 
+                <p:row>
+                    <p:column>                        
+                        <p:outputLabel value="Mensagem" /> <br/>
+                        <p:inputText id="inputMsgFechaCupom" value="DESCRICAO" />
+                    </p:column>                        
+                    <p:column> 
+                        <p:commandButton value="fechaCupom" onclick="fechaCupom()"/>
+                    </p:column>
+                </p:row> 
+                <p:row>               
+                    <p:column> 
+                        <p:commandButton value="cancelaCupom" onclick="cancelaCupom()"/>
+                    </p:column>
+                </p:row> 
+                <p:row>               
+                    <p:column> 
+                        <p:commandButton value="status" onclick="verificarStatus()"/>
+                    </p:column>
+                </p:row> 
+                <p:row>               
+                    <p:column> 
+                        <p:commandButton value="ativar" onclick="ativar()"/>
+                    </p:column>
+                </p:row> 
+            </p:panelGrid>
+       
+            <applet id="appletECF"  
+                    code="AppletECF" 
+                    archive="jna-3.5.1.jar, platform-3.5.1.jar, jACBrFramework.jar, mongo.jar, AppletECF.jar">  
+            </applet> 
+       
+        </h:body>
+        </h:form>
+    </f:view>
+</html>
+
